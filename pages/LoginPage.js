@@ -11,6 +11,7 @@ export default class LoginPage {
         this.loginEmailAddr = page.getByTestId('login-email');
         this.loginPassword = page.getByTestId('login-password');
         this.loginButton = page.getByTestId('login-button');
+        this.loginIncorrectParagraph = page.getByText('Your email or password is incorrect!');
     }
 
     async setNameInput(name) {

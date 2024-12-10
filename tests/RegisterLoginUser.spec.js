@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage';
 import ConsentModal from '../pages/ConsentModal';
 import LoginPage from '../pages/LoginPage'; 
 import userData from '../data/userData';
+import incorrectUserData from '../data/incorrectUserData';
 import SignupPage from '../pages/SignupPage';
 import AccountCreatedPage from '../pages/AccountCreatedPage';
 import AccountDeletedPage from '../pages/AccountDeletedPage';
@@ -60,5 +61,18 @@ test.describe('Register and login tests', () => {
         await loginPage.loginToAccount(userData);
 
         await expect(navBar.loggedInAsUsername).toHaveText(`Logged in as ${userData.name}`);
+    })
+
+    test('Login User with incorrect email and password', async ({ page }) => {
+        const homePage = new HomePage(page);
+        const navBar = new NavBar(page);
+        const loginPage = new LoginPage(page);
+
+        await expect(homePage.carouselSlider).toBeVisible();
+        await navBar.clickSignupLoginLink();
+        
+        await expect(loginPage.loginToAccountHeader).toBeVisible();
+        await loginPage.loginToAccount(incorrectUserData);
+        await expect(loginPage.loginIncorrectParagraph).toBeVisible(); 
     })
 });
