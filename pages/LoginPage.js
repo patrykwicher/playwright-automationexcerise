@@ -6,6 +6,7 @@ export default class LoginPage {
         this.signupName = page.getByTestId('signup-name');
         this.signupEmail = page.getByTestId('signup-email');
         this.signupButton = page.getByTestId('signup-button');
+        this.emailExistsParagraph = page.locator('p', { hasText: 'Email Address already exist!' });
         // Login form
         this.loginToAccountHeader = page.getByRole('heading', { name: 'Login to your account' });
         this.loginEmailAddr = page.getByTestId('login-email');
@@ -14,21 +15,22 @@ export default class LoginPage {
         this.loginIncorrectParagraph = page.getByText('Your email or password is incorrect!');
     }
 
-    async setNameInput(name) {
+    async setSignupName(name) {
         await this.signupName.fill(name);
     }
 
-    async setEmailInput(email) {
+    async setSignupEmail(email) {
         await this.signupEmail.fill(email);
     }
-
-    async signup(name, email) {
-        await this.setNameInput(name);
-        await this.setEmailInput(email);
-    }
-
+    
     async clickSignupButton() {
         await this.signupButton.click();
+    }
+
+    async signup(userData) {
+        await this.setSignupName(userData.name);
+        await this.setSignupEmail(userData.email);
+        await this.clickSignupButton();
     }
 
     async setLoginEmail(email) {
