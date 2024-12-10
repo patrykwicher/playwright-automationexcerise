@@ -6,6 +6,7 @@ export default class NavBar {
         this.signupLoginLink = page.locator('a', { hasText: ' Signup / Login' });
         this.loggedInAsUsername = page.locator('a', { hasText: ` Logged in as ${userData.name}` })
         this.deleteAccountLink = page.locator('a', { hasText: ' Delete Account' });
+        this.logoutButton = page.locator('a', { hasText: ' Logout' });
     }
 
     async clickSignupLoginLink() {
@@ -14,5 +15,9 @@ export default class NavBar {
 
     async clickDeleteAccountLink() {
         await this.deleteAccountLink.click();
+    }
+
+    async clickLogoutButton() {
+        await this.logoutButton.click();
     }
 }

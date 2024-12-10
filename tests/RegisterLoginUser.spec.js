@@ -26,7 +26,6 @@ test.describe('Register and login tests', () => {
         //const accountDeletedPage = new AccountDeletedPage(page);
         
         await expect(homePage.carouselSlider).toBeVisible();
-
         await navBar.clickSignupLoginLink();
         
         await expect(loginPage.newUserHeader).toBeVisible();
@@ -74,5 +73,22 @@ test.describe('Register and login tests', () => {
         await expect(loginPage.loginToAccountHeader).toBeVisible();
         await loginPage.loginToAccount(incorrectUserData);
         await expect(loginPage.loginIncorrectParagraph).toBeVisible(); 
+    })
+
+    test('Login and logout user', async ({ page }) => {
+        const homePage = new HomePage(page);
+        const navBar = new NavBar(page);
+        const loginPage = new LoginPage(page);
+
+        await expect(homePage.carouselSlider).toBeVisible();
+        await navBar.clickSignupLoginLink();
+
+        await expect(loginPage.loginToAccountHeader).toBeVisible();
+        await loginPage.loginToAccount(userData);
+
+        await expect(navBar.loggedInAsUsername).toHaveText(`Logged in as ${userData.name}`);
+        await navBar.clickLogoutButton();
+
+        await expect(page.url()).toBe('https://automationexercise.com/login');
     })
 });
