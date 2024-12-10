@@ -16,13 +16,13 @@ test.describe('Register and login tests', () => {
         await consentModal.clickConsentButton();
     });
 
-    test('Register new user and delete it', async ({ page }) => {
+    test('Register new user', async ({ page }) => {
         const homePage = new HomePage(page);
         const navBar = new NavBar(page);
         const loginPage = new LoginPage(page);
         const signupPage = new SignupPage(page);
         const accountCreatedPage = new AccountCreatedPage(page);
-        const accountDeletedPage = new AccountDeletedPage(page);
+        //const accountDeletedPage = new AccountDeletedPage(page);
         
         await expect(homePage.carouselSlider).toBeVisible();
 
@@ -39,12 +39,26 @@ test.describe('Register and login tests', () => {
         await expect(accountCreatedPage.accountCreatedHeader).toBeVisible();
         await accountCreatedPage.clickContinueButton();
 
-        await expect(navBar.loggedInAsUsername).toBeVisible();
-        await navBar.clickDeleteAccountLink();
+        await expect(navBar.loggedInAsUsername).toHaveText(`Logged in as ${userData.name}`);
+        // await navBar.clickDeleteAccountLink();
         
-        await expect(accountDeletedPage.accountDeletedHeader).toBeVisible();
-        await accountDeletedPage.clickContinueButton();
+        // await expect(accountDeletedPage.accountDeletedHeader).toBeVisible();
+        // await accountDeletedPage.clickContinueButton();
 
         await expect(page.url()).toBe('https://automationexercise.com/');
     });
+
+    test('Login User with correct email and password', async ({ page }) => {
+        const homePage = new HomePage(page);
+        const navBar = new NavBar(page);
+        const loginPage = new LoginPage(page);
+
+        await expect(homePage.carouselSlider).toBeVisible();
+        await navBar.clickSignupLoginLink();
+        
+        await expect(loginPage.loginToAccountHeader).toBeVisible();
+        await loginPage.loginToAccount(userData);
+
+        await expect(navBar.loggedInAsUsername).toHaveText(`Logged in as ${userData.name}`);
+    })
 });

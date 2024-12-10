@@ -2,17 +2,23 @@ export default class LoginPage {
     constructor(page) {
         this.page = page;
         this.newUserHeader = page.getByRole('heading', { name: 'New User Signup!' });
-        this.name = page.getByTestId('signup-name');
-        this.email = page.getByTestId('signup-email');
+        // Signup form
+        this.signupName = page.getByTestId('signup-name');
+        this.signupEmail = page.getByTestId('signup-email');
         this.signupButton = page.getByTestId('signup-button');
+        // Login form
+        this.loginToAccountHeader = page.getByRole('heading', { name: 'Login to your account' });
+        this.loginEmailAddr = page.getByTestId('login-email');
+        this.loginPassword = page.getByTestId('login-password');
+        this.loginButton = page.getByTestId('login-button');
     }
 
     async setNameInput(name) {
-        await this.name.fill(name);
+        await this.signupName.fill(name);
     }
 
     async setEmailInput(email) {
-        await this.email.fill(email);
+        await this.signupEmail.fill(email);
     }
 
     async signup(name, email) {
@@ -22,5 +28,23 @@ export default class LoginPage {
 
     async clickSignupButton() {
         await this.signupButton.click();
+    }
+
+    async setLoginEmail(email) {
+        await this.loginEmailAddr.fill(email);
+    }
+
+    async setLoginPassword(password) {
+        await this.loginPassword.fill(password);
+    }
+
+    async clickLoginButton() {
+        await this.loginButton.click();
+    }
+
+    async loginToAccount(userData) {
+        await this.setLoginEmail(userData.email);
+        await this.setLoginPassword(userData.password);
+        await this.clickLoginButton();
     }
 }
