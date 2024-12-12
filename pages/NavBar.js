@@ -10,6 +10,7 @@ export default class NavBar {
         this.contactUsButton = page.locator('a', { hasText: ' Contact us' });
         this.homeButton = page.locator('a', { hasText: ' Home'});
         this.testCasesButton = page.locator('//li/a[@href="/test_cases"]');
+        this.productsButton = page.locator('a', { hasText: ' Products' });
     }
 
     async clickSignupLoginLink() {
@@ -34,5 +35,9 @@ export default class NavBar {
 
     async clickTestCasesButton() {
         await this.testCasesButton.click();
+    }
+
+    async clickProductsButton() {
+        await this.productsButton.click();
     }
 }
