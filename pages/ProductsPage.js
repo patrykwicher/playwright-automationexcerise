@@ -11,6 +11,10 @@ export default class ProductsPage {
         this.firstProductPrice = page.getByText('Rs. 500'); 
         this.firstProductAvailability = page.getByText('Availability: ');
         this.firstProductCondition = page.getByText('Condition: ');
+        this.searchBar = page.getByPlaceholder('Search Product');
+        this.searchButton = page.locator('#submit_search');
+        this.searchedProductsHeader = page.getByRole('heading', { name: 'Searched Products' });
+        this.numberOfProductsFound = page.locator('.single-products');
     }
 
     async clickFirstProduct() {
@@ -23,5 +27,10 @@ export default class ProductsPage {
         await expect(this.firstProductPrice).toBeVisible();
         await expect(this.firstProductAvailability).toBeVisible();
         await expect(this.firstProductCondition).toBeVisible();
+    }
+
+    async searchProduct(product) {
+        await this.searchBar.fill(product);
+        await this.searchButton.click();
     }
 }

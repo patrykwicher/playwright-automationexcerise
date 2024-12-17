@@ -23,8 +23,27 @@ test.describe("Tests related to products", () => {
     await expect(productsPage.allProductsHeader).toBeVisible();
     await expect(productsPage.productsList).toBeVisible();
     await productsPage.clickFirstProduct();
-    await expect(page.url()).toBe('https://automationexercise.com/product_details/1');
 
+    await expect(page.url()).toBe('https://automationexercise.com/product_details/1');
     await productsPage.expectDetailsAreVisible();
+  })
+
+  test('Search Product', async ({ page }) => {
+    const homePage = new HomePage(page);
+    const navBar = new NavBar(page);
+    const productsPage = new ProductsPage(page);
+    const product = 'Top';
+    let numberOfProductsFound = undefined;
+
+    await expect(homePage.carouselSlider).toBeVisible();
+    await navBar.clickProductsButton();
+
+    await expect(productsPage.allProductsHeader).toBeVisible();
+    await productsPage.searchProduct(product);
+
+    await expect(productsPage.searchedProductsHeader).toBeVisible();
+    numberOfProductsFound = await productsPage.numberOfProductsFound.count();
+
+    await expect(productsPage.numberOfProductsFound).toHaveCount(numberOfProductsFound);
   })
 });
