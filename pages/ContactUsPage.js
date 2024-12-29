@@ -9,7 +9,7 @@ export default class ContactUsPage {
         this.chooseFileButton = page.locator('input[name="upload_file"]');
         this.submit = page.getByTestId('submit-button');
         this.statusSuccess = page.locator('//div[@class="status alert alert-success"]'); 
-        this.homeButton = page.locator('a[@class="btn btn-success"]');
+        this.homeButton = page.locator('//a[@class="btn btn-success"]');
     }
 
     async setName(name) {

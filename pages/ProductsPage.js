@@ -6,6 +6,7 @@ export default class ProductsPage {
         this.allProductsHeader = page.getByRole('heading', { name: 'All Products' });
         this.productsList = page.locator('.features_items');
         this.firstProduct = page.locator('[href="/product_details/1"]');
+        this.firstProductImage = page.locator('//img[@src="/get_product_picture/1"]')
         this.firstProductName = page.getByRole('heading', { name: 'Blue Top' });
         this.firstProductCategory = page.locator('p', { hasText: 'Category:' })
         this.firstProductPrice = page.getByText('Rs. 500'); 
@@ -15,6 +16,8 @@ export default class ProductsPage {
         this.searchButton = page.locator('#submit_search');
         this.searchedProductsHeader = page.getByRole('heading', { name: 'Searched Products' });
         this.numberOfProductsFound = page.locator('.single-products');
+        this.addToCartOverlayButtons = page.locator('.overlay-content > .btn');
+        this.allProducts = page.locator('.single-products');
     }
 
     async clickFirstProduct() {
@@ -32,5 +35,13 @@ export default class ProductsPage {
     async searchProduct(product) {
         await this.searchBar.fill(product);
         await this.searchButton.click();
+    }
+
+    async clickAddToCartFirstProduct() {
+        await this.addToCartOverlayButtons.first().click();
+    }
+
+    async clickAddToCart2ndProduct() {
+        await this.addToCartOverlayButtons.nth(1).click();
     }
 }
