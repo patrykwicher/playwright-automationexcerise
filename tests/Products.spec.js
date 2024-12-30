@@ -3,6 +3,7 @@ import ConsentModal from "../pages/ConsentModal";
 import HomePage from "../pages/HomePage";
 import NavBar from "../pages/NavBar";
 import ProductsPage from "../pages/ProductsPage";
+import SingleProductPage from "../pages/SingleProductPage";
 
 test.describe("Tests related to products", () => {
   test.beforeEach(async ({ page }) => {
@@ -16,6 +17,7 @@ test.describe("Tests related to products", () => {
     const homePage = new HomePage(page);
     const navBar = new NavBar(page);
     const productsPage = new ProductsPage(page);
+    const singleProductPage = new SingleProductPage(page);
 
     await expect(homePage.carouselSlider).toBeVisible();
     await navBar.clickProductsButton();
@@ -25,7 +27,7 @@ test.describe("Tests related to products", () => {
     await productsPage.clickFirstProduct();
 
     await expect(page.url()).toBe('https://automationexercise.com/product_details/1');
-    await productsPage.expectDetailsAreVisible();
+    await singleProductPage.expectDetailsAreVisible();
   })
 
   test('Search Product', async ({ page }) => {

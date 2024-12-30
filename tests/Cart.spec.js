@@ -24,7 +24,7 @@ test.describe("Cart tests", () => {
     await expect(homePage.carouselSlider).toBeVisible();
     await navBar.clickProductsButton();
 
-    await productsPage.firstProductImage.hover();
+    await productsPage.allProducts.first().hover();
     await expect(productsPage.addToCartOverlayButtons.first()).toBeVisible();
     await productsPage.clickAddToCartFirstProduct();
 
