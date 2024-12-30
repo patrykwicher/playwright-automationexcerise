@@ -5,9 +5,7 @@ export default class ProductsPage {
         this.page = page;
         this.allProductsHeader = page.getByRole('heading', { name: 'All Products' });
         this.productsList = page.locator('.features_items');
-        this.viewProductButtons = page.locator('//a', { hasText: 'View Product '});
-
-
+        this.viewProductButtons = page.locator('//a', { hasText: 'View Product'});
         this.searchBar = page.getByPlaceholder('Search Product');
         this.searchButton = page.locator('#submit_search');
         this.searchedProductsHeader = page.getByRole('heading', { name: 'Searched Products' });
@@ -16,8 +14,12 @@ export default class ProductsPage {
         this.allProducts = page.locator('.single-products');
     }
 
-    async clickFirstProduct() {
+    async viewFirstProduct() {
         await this.viewProductButtons.first().click();
+    }
+
+    async viewNthProduct(nthProdIndex) {
+        await this.viewProductButtons.nth(nthProdIndex).click();
     }
 
     async searchProduct(product) {
